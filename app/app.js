@@ -48,6 +48,7 @@
         <div class="grid" style="margin-top:14px">
           <button class="btn primary block" data-act="exam"><b>Prüfung simulieren</b><small>45 Fragen · 40 Minuten · bestanden ab 34</small></button>
           <button class="btn block" data-act="practice" data-ch="ag"><b>Alle Fragen üben</b><small>zufällige Reihenfolge, sofortige Auflösung</small></button>
+          ${orderedBtn('ag')}
           <button class="btn block" data-act="wrong" data-ch="ag" ${wAg ? '' : 'disabled'}><b>Fehler wiederholen</b><small>${wAg} Frage(n)</small></button>
         </div>
         <h2>Nach Themenbereich üben</h2>
@@ -68,6 +69,7 @@
             return `<button class="btn block" data-act="practice" data-ch="extra" data-cat="${k}"><b>${esc(catName(k))}</b><small>${learned(qs)} / ${qs.length}</small></button>`;
           }).join('')}
           <button class="btn block" data-act="practice" data-ch="extra"><b>Alle Zusatzfragen</b><small>gemischt</small></button>
+          ${orderedBtn('extra')}
           <button class="btn block" data-act="wrong" data-ch="extra" ${wEx ? '' : 'disabled'}><b>Fehler wiederholen</b><small>${wEx} Frage(n)</small></button>
         </div>
       </div>
@@ -84,6 +86,7 @@
       const a = b.dataset.act, ch = b.dataset.ch, cat = b.dataset.cat;
       if (a === 'exam') startExam();
       else if (a === 'practice') startPractice(chapter(ch).questions.filter(q => !cat || q.cat === cat), cat ? catName(cat) : chapter(ch).title[0]);
+      else if (a === 'ordered') startOrdered(ch);
       else if (a === 'wrong') startPractice(wrongList(chapter(ch).questions), 'Fehler wiederholen');
       else if (a === 'info') info();
       else if (a === 'reset' && confirm('Gesamten Lernfortschritt und alle Prüfungsresultate löschen?')) { store = { stats: {}, esAlways: store.esAlways, exams: [] }; save(); home(); }
@@ -96,6 +99,20 @@
   function startPractice(qs, title) {
     if (!qs.length) return;
     S = { mode: 'practice', title, list: shuffle(qs), idx: 0, answers: {}, es: {}, right: 0 };
+    render();
+  }
+  // Der Reihe nach (wie im PDF), mit gespeicherter Position zum Weitermachen
+  function orderedList(ch) { return chapter(ch).questions.slice().sort((a, b) => a.n - b.n); }
+  function orderedBtn(ch) {
+    const list = orderedList(ch), pos = (store.pos || {})[ch] || 0;
+    const sub = pos > 0 ? `weiter bei Frage ${list[pos].n} (${pos + 1} von ${list.length})` : `Nr. ${list[0].n} bis ${list[list.length - 1].n}${ch === 'ag' ? ', wie im PDF' : ''}`;
+    return `<button class="btn block" data-act="ordered" data-ch="${ch}"><b>${ch === 'ag' ? 'Alle Fragen' : 'Alle Zusatzfragen'} der Reihe nach</b><small>${sub}</small></button>`;
+  }
+  function startOrdered(ch) {
+    const list = orderedList(ch);
+    let start = (store.pos || {})[ch] || 0;
+    if (start > 0 && !confirm(`Bei Frage ${list[start].n} weitermachen?\n\nOK = weitermachen · Abbrechen = von vorne beginnen`)) start = 0;
+    S = { mode: 'practice', title: (ch === 'ag' ? 'Alle Fragen' : 'Alle Zusatzfragen') + ' der Reihe nach', list, idx: start, answers: {}, es: {}, right: 0, posKey: ch };
     render();
   }
   function startExam() {
@@ -119,6 +136,7 @@
   // ---------- Frage anzeigen ----------
   function render() {
     const q = S.list[S.idx];
+    if (S.posKey) { store.pos = store.pos || {}; store.pos[S.posKey] = S.idx; save(); }
     const showEs = S.es[q.id] !== undefined ? S.es[q.id] : store.esAlways;
     const T = showEs ? q.es : q.de;
     const chosen = S.answers[q.id];
@@ -171,7 +189,10 @@
     document.getElementById('prev').onclick = () => { S.idx--; render(); };
     document.getElementById('next').onclick = () => {
       if (S.idx < S.list.length - 1) { S.idx++; render(); window.scrollTo(0, 0); }
-      else if (S.mode === 'practice') practiceDone();
+      else if (S.mode === 'practice') {
+        if (S.posKey) { store.pos[S.posKey] = 0; save(); }
+        practiceDone();
+      }
     };
     document.getElementById('quit').onclick = () => {
       if (S.mode === 'exam' ? confirm('Prüfung abbrechen? Das Resultat wird nicht gespeichert.') : true) {

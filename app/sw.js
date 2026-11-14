@@ -1,5 +1,5 @@
 // Offline-Cache: alle App-Dateien beim Installieren laden
-const CACHE = "einbuergerung-ag-v1";
+const CACHE = "einbuergerung-ag-v2";
 const FILES = ["./", "index.html", "style.css", "app.js", "data.js", "manifest.webmanifest",
   "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",
   "img/q72.png", "img/q137.png", "img/q156.png", "img/q165.png", "img/q174.png", "img/q196.png", "img/q239.png"];
