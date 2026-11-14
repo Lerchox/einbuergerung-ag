@@ -8,11 +8,33 @@
   D.chapters.forEach(c => c.questions.forEach(q => { byId[q.id] = q; q.chapter = c.id; }));
 
   // ---------- Speicher (nur lokal im Browser) ----------
-  const APP_VERSION = '4 (14.11.2026)';
-  const KEY = 'einb-ag-v1';
-  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
-  let store = Object.assign({ stats: {}, esAlways: false, exams: [] }, load());
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) { /* ohne Speicher weiter */ } }
+  const APP_VERSION = '5 (14.11.2026)';
+  // Mehrere Personen (Profile) auf demselben Gerät: jede Person hat ihren eigenen Fortschritt.
+  const OLD_KEY = 'einb-ag-v1', PKEY = 'einb-ag-profiles', pKey = id => 'einb-ag-p-' + id;
+  const lsGet = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
+  const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ohne Speicher weiter */ } };
+  const lsDel = k => { try { localStorage.removeItem(k); } catch (e) { /* egal */ } };
+  const blank = () => ({ stats: {}, esAlways: false, exams: [], pos: {} });
+
+  let profiles = lsGet(PKEY);
+  if (!profiles || !profiles.list || !profiles.list.length) {
+    profiles = { active: 'p1', list: [{ id: 'p1', name: 'Person 1' }] };
+    const old = lsGet(OLD_KEY);              // bisherigen Fortschritt übernehmen
+    if (old) { lsSet(pKey('p1'), old); lsDel(OLD_KEY); }
+    lsSet(PKEY, profiles);
+  }
+  if (!profiles.list.some(p => p.id === profiles.active)) profiles.active = profiles.list[0].id;
+  const activeProfile = () => profiles.list.find(p => p.id === profiles.active);
+  let store = Object.assign(blank(), lsGet(pKey(profiles.active)) || {});
+  function save() { lsSet(pKey(profiles.active), store); }
+  function switchProfile(id) {
+    profiles.active = id; lsSet(PKEY, profiles);
+    store = Object.assign(blank(), lsGet(pKey(id)) || {});
+  }
+  function askName(def) {
+    const n = (prompt('Name der Person:', def) || '').trim().slice(0, 30);
+    return n || null;
+  }
   function record(q, right) {
     const s = store.stats[q.id] || { r: 0, w: 0, last: null };
     right ? s.r++ : s.w++; s.last = right; store.stats[q.id] = s; save();
@@ -41,6 +63,17 @@
     app.innerHTML = `
       <h1>Einbürgerung Kanton Aargau</h1>
       <p class="lead">Lerntrainer für den staatsbürgerlichen Test und das Einbürgerungsgespräch (Gemeinde Strengelbach). Bei jeder Frage kannst du mit dem gelben Knopf auf Spanisch (Venezuela) umschalten.</p>
+
+      <div class="card profiles">
+        <div class="meta" style="margin-bottom:8px">Wer lernt gerade? Jede Person hat ihren eigenen Fortschritt.</div>
+        <div class="row">
+          ${profiles.list.map(p => `<button class="btn ${p.id === profiles.active ? 'primary' : ''}" data-act="profile" data-id="${p.id}">👤 ${esc(p.name)}</button>`).join('')}
+          ${profiles.list.length < 6 ? '<button class="btn" data-act="addProfile">＋ Person</button>' : ''}
+          <span class="spacer"></span>
+          <button class="btn" data-act="renameProfile" title="Aktive Person umbenennen">✎ Umbenennen</button>
+          ${profiles.list.length > 1 ? '<button class="btn" data-act="deleteProfile" title="Aktive Person entfernen">🗑</button>' : ''}
+        </div>
+      </div>
 
       <div class="card">
         <h2 style="margin-top:0">Kapitel 1 · Offizieller Übungstest Aargau</h2>
@@ -96,7 +129,23 @@
       else if (a === 'wrong') startPractice(wrongList(chapter(ch).questions), 'Fehler wiederholen');
       else if (a === 'info') info();
       else if (a === 'update') checkUpdate(b);
-      else if (a === 'reset' && confirm('Gesamten Lernfortschritt und alle Prüfungsresultate löschen?')) { store = { stats: {}, esAlways: store.esAlways, exams: [] }; save(); home(); }
+      else if (a === 'reset' && confirm(`Lernfortschritt und Prüfungsresultate von «${activeProfile().name}» löschen?`)) { store = Object.assign(blank(), { esAlways: store.esAlways }); save(); home(); }
+      else if (a === 'profile') { switchProfile(b.dataset.id); home(); }
+      else if (a === 'addProfile') {
+        const name = askName('Person ' + (profiles.list.length + 1));
+        if (name) { const id = 'p' + Date.now().toString(36); profiles.list.push({ id, name }); switchProfile(id); home(); }
+      }
+      else if (a === 'renameProfile') {
+        const p = activeProfile(), name = askName(p.name);
+        if (name) { p.name = name; lsSet(PKEY, profiles); home(); }
+      }
+      else if (a === 'deleteProfile') {
+        const p = activeProfile();
+        if (confirm(`Person «${p.name}» mit ihrem ganzen Fortschritt entfernen?`)) {
+          lsDel(pKey(p.id)); profiles.list = profiles.list.filter(x => x.id !== p.id);
+          switchProfile(profiles.list[0].id); home();
+        }
+      }
     }));
     document.getElementById('esAlways').addEventListener('change', e => { store.esAlways = e.target.checked; save(); });
     window.scrollTo(0, 0);
@@ -163,7 +212,7 @@
 
     app.innerHTML = `
       <div class="row">
-        <span class="meta">${esc(S.title)} · Frage ${S.idx + 1} von ${S.list.length}${S.mode === 'practice' ? ` · ${S.right} richtig` : ''}</span>
+        <span class="meta">👤 ${esc(activeProfile().name)} · ${esc(S.title)} · Frage ${S.idx + 1} von ${S.list.length}${S.mode === 'practice' ? ` · ${S.right} richtig` : ''}</span>
         <span class="spacer"></span>
         <button class="btn es" id="esBtn">${showEs ? 'DE · Deutsch' : 'ES · Español'}</button>
       </div>
