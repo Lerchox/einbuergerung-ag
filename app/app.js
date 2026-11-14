@@ -8,6 +8,7 @@
   D.chapters.forEach(c => c.questions.forEach(q => { byId[q.id] = q; q.chapter = c.id; }));
 
   // ---------- Speicher (nur lokal im Browser) ----------
+  const APP_VERSION = '3 (14.11.2026)';
   const KEY = 'einb-ag-v1';
   function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
   let store = Object.assign({ stats: {}, esAlways: false, exams: [] }, load());
@@ -81,6 +82,11 @@
           <span class="spacer"></span>
           <button class="btn" data-act="reset">Fortschritt löschen</button>
         </div>
+        <div class="row" style="margin-top:12px">
+          <span class="meta">Version ${APP_VERSION}</span>
+          <span class="spacer"></span>
+          <button class="btn" data-act="update">🔄 Nach Update suchen</button>
+        </div>
       </div>`;
     app.querySelectorAll('[data-act]').forEach(b => b.addEventListener('click', () => {
       const a = b.dataset.act, ch = b.dataset.ch, cat = b.dataset.cat;
@@ -89,10 +95,21 @@
       else if (a === 'ordered') startOrdered(ch);
       else if (a === 'wrong') startPractice(wrongList(chapter(ch).questions), 'Fehler wiederholen');
       else if (a === 'info') info();
+      else if (a === 'update') checkUpdate(b);
       else if (a === 'reset' && confirm('Gesamten Lernfortschritt und alle Prüfungsresultate löschen?')) { store = { stats: {}, esAlways: store.esAlways, exams: [] }; save(); home(); }
     }));
     document.getElementById('esAlways').addEventListener('change', e => { store.esAlways = e.target.checked; save(); });
     window.scrollTo(0, 0);
+  }
+
+  // ---------- Update von Hand holen ----------
+  async function checkUpdate(btn) {
+    btn.disabled = true; btn.textContent = 'Suche Update …';
+    try {
+      // Neue sw.js holen; die Seite selbst lädt dank «no-cache» ohnehin frisch vom Server
+      if (window.__swReg) await window.__swReg.update();
+    } catch (e) { /* offline: einfach neu laden */ }
+    location.reload();
   }
 
   // ---------- Sitzungen ----------
