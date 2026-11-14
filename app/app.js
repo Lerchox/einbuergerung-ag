@@ -8,7 +8,7 @@
   D.chapters.forEach(c => c.questions.forEach(q => { byId[q.id] = q; q.chapter = c.id; }));
 
   // ---------- Speicher (nur lokal im Browser) ----------
-  const APP_VERSION = '3 (14.11.2026)';
+  const APP_VERSION = '4 (14.11.2026)';
   const KEY = 'einb-ag-v1';
   function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
   let store = Object.assign({ stats: {}, esAlways: false, exams: [] }, load());
@@ -48,7 +48,7 @@
         <div class="bar"><i style="width:${(learned(ag) / ag.length * 100).toFixed(1)}%"></i></div>
         <div class="grid" style="margin-top:14px">
           <button class="btn primary block" data-act="exam"><b>Prüfung simulieren</b><small>45 Fragen · 40 Minuten · bestanden ab 34</small></button>
-          <button class="btn block" data-act="practice" data-ch="ag"><b>Alle Fragen üben</b><small>zufällige Reihenfolge, sofortige Auflösung</small></button>
+          <button class="btn block" data-act="practice" data-ch="ag"><b>Alle Fragen, zufällig</b><small>sofortige Auflösung</small></button>
           ${orderedBtn('ag')}
           <button class="btn block" data-act="wrong" data-ch="ag" ${wAg ? '' : 'disabled'}><b>Fehler wiederholen</b><small>${wAg} Frage(n)</small></button>
         </div>
