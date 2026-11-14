@@ -1,0 +1,78 @@
+250|¿Cuál es una tarea importante del municipio?|Se encarga de que haya lugares baratos para hacer compras.|Negocia tratados internacionales.|Mantiene las calles municipales y los edificios públicos del municipio.|Construye buenas conexiones a la red de autopistas.
+251|¿Quién cuenta las boletas en las votaciones y elecciones políticas?|La oficina militar|La mesa electoral (Wahlbüro)|Los mismos votantes|La policía
+252|¿Cuál es un requisito necesario para hacer un aprendizaje profesional (Berufslehre)?|Haber terminado la escuela secundaria|Tener al menos 15 años|Tener la ciudadanía suiza|Tener licencia de conducir
+253|Los gastos de un tratamiento dental normalmente los paga…|el Ejército de Salvación.|el seguro de salud obligatorio.|la paciente o el paciente.|el empleador.
+254|¿Desde cuándo tiene que tener un niño seguro de salud en Suiza?|A más tardar un año después de nacer|Desde que entra a la escuela|A más tardar tres meses después de nacer|Un niño no necesita seguro de salud propio
+255|En Suiza la vacunación es…|recomendada por la Oficina Federal de Salud Pública (BAG).|obligatoria.|permitida solo a partir de los 16 años.|prohibida.
+256|¿Quién decide a qué escuela de nivel superior (Oberstufe) puede ir una alumna o un alumno?|El docente, con base en pruebas de rendimiento|El concejo municipal o la dirección escolar, si el docente y los padres no se ponen de acuerdo|El consejo estudiantil|La alumna o el alumno mismo
+257|¿Quién es el principal responsable de la escuela pública (Volksschule) en Suiza?|La administración escolar federal|Los cantones y los municipios|La conferencia escolar de los cantones|El consejo de la escuela pública
+258|La crianza de los hijos es sobre todo tarea…|del Estado.|de los abuelos.|de los padres.|de las escuelas.
+259|¿Cuántos años dura en Suiza la escuela obligatoria?|13 años|9 años|11 años|6 años
+260|¿A dónde pueden acudir los padres si tienen dificultades con sus hijos?|Al servicio de orientación familiar/educativa del municipio o del distrito|Al hospital del distrito|Al concejo municipal|A la parroquia
+261|¿Qué está prohibido en general en las escuelas?|Comer|Fumar|Jugar|Dar la propia opinión
+262|¿Quién decide en qué salón (clase) de primaria queda un niño?|Los padres|La dirección escolar o el concejo municipal|La pediatra o el pediatra|Los mismos niños
+263|Una escuela de bachillerato (gymnasiale Maturitätsschule)…|es lo mismo que una escuela de bachillerato profesional.|existe en todos los cantones.|termina con el título de bachelor (licenciatura).|solo existe en las regiones de habla alemana de Suiza.
+264|¿Cuál NO es una etapa obligatoria del sistema educativo suizo?|Nivel preescolar|Secundaria I|Bachillerato (Gymnasium)|Primaria
+265|¿Qué es el BAG?|La prestación de servicios generales de salud|La Oficina Federal de Salud Pública|La Oficina Federal de Atención Básica General|El órgano de control federal de los seguros básicos generales
+266|En Suiza, el número 144 es…|el número de emergencia de ambulancias.|la central de bomberos.|la central de policía.|el servicio de información.
+267|¿Qué seguro es obligatorio en Suiza?|El seguro de vejez y sobrevivientes (AHV/AVS)|El seguro juvenil|El seguro de vida|El seguro de nacimiento
+268|¿Qué afirmación sobre el seguro de responsabilidad civil privada es FALSA?|Protege de las consecuencias de daños a personas y cosas.|Protege de las consecuencias de daños patrimoniales.|No es obligatorio.|Siempre viene incluido en el seguro de salud.
+269|¿Cuál es un seguro social importante en Suiza?|El seguro de carro y ocupantes|El seguro de invalidez (IV)|El seguro contra robo|El seguro de construcción e incendio
+270|¿Quién se encarga de financiar y organizar la escuela primaria?|Los padres|El cantón junto con los municipios|La Confederación|El círculo escolar
+271|¿Qué apoyo estatal reciben todas las familias en Suiza?|Ningún apoyo|Viajes gratis en tren y autobús|Becas para jóvenes en formación|Asignaciones familiares por hijo (Kinderzulagen)
+272|Si uno no está de acuerdo con la factura de impuestos…|paga provisionalmente solo la mitad.|tiene que devolverla a la oficina de impuestos.|tiene que presentarse a la policía.|puede presentar sus objeciones por escrito ante la oficina de impuestos.
+273|¿Cómo apoya el Estado a las familias en Suiza?|Sin apoyo adicional|Con Internet gratis|Con alimentos baratos|Con deducciones de impuestos
+274|¿Qué significa AHV?|Seguro de vejez y sobrevivientes (Alters- und Hinterlassenenversicherung)|Seguro de carro y viaje de regreso|Seguro de trabajo y hogar|Oficina de administración de inmuebles
+275|¿Qué prestaciones sociales pagan los municipios?|Ayuda social en una situación de emergencia|La pensión de vejez|Los costos del examen de manejo|Los gastos de viaje en el tiempo libre
+276|¿Qué aporte de seguro se descuenta directamente del sueldo de los empleados? El aporte para el…|seguro de carro y accidentes.|seguro de desempleo (ALV).|seguro contra robo.|seguro contra incendios.
+277|¿Qué seguro es obligatorio en Suiza?|El seguro de responsabilidad civil|El seguro de salud|El seguro de trabajo|El seguro de patrimonio
+278|¿Qué es el RAV?|El Centro Regional de Colocación (oficina de empleo)|La oficina jurídica de seguros generales|Un instituto de asuntos jurídicos|Una caja de pensiones
+279|¿Desde cuándo se está obligado a pagar impuestos en Suiza?|A los 20 años, porque normalmente se termina el aprendizaje|A los 18 años, porque en Suiza se es mayor de edad|Desde el nacimiento, pero normalmente desde los primeros ingresos por trabajo|Al terminar el aprendizaje o la formación, porque se entra al mundo laboral
+280|¿A quién NO se le pagan impuestos?|A la Confederación|Al distrito|Al municipio|Al cantón
+281|¿Qué significa la sigla IV?|Representación de intereses|Procedimiento internacional|Suceso inaceptable|Seguro de invalidez (Invalidenversicherung)
+282|¿Quién tiene que asegurarse en una caja de salud (Krankenkasse)?|Nadie|Solo los trabajadores|Solo los niños y las personas mayores|Todos los habitantes
+283|¿Quién paga los gastos de hospital por un accidente laboral grave?|La persona afectada|El seguro de accidentes laborales|El sindicato|El empleador
+284|¿Cuándo empieza la escolaridad obligatoria en Argovia?|En el kínder (Kindergarten)|En la primaria|En el grupo de juego (Spielgruppe)|En la clase introductoria
+285|¿Qué instituciones financia el Estado con el dinero de los impuestos?|Consultorios médicos|Cines|Escuelas|Internet
+286|¿Quién NO paga primas del seguro de desempleo?|Las personas en formación profesional|Los jubilados|Los trabajadores|Todas las personas mayores de 50 años
+287|¿Qué es la Asociación de Inquilinas e Inquilinos (Mieterverband)?|La oficina federal de conciliación en asuntos de alquiler|Una agencia de alquiler de viviendas|La representación de los intereses de las inquilinas y los inquilinos|La unión de todos los inquilinos de Suiza
+288|¿Qué puede hacer una inquilina o un inquilino si la administración cobra reparaciones del edificio como gastos accesorios (Nebenkosten)?|Puede botar la factura.|Puede presentar una objeción ante el arrendador.|Puede hacer las reparaciones por su cuenta.|Puede rescindir el contrato de alquiler.
+289|¿Qué está prohibido en Suiza? Está prohibido…|que un hombre y una mujer vivan juntos sin casarse.|que un adulto viva con sus padres.|que un hombre esté casado con dos mujeres al mismo tiempo.|que un hombre críe solo a sus hijos.
+290|¿A partir de qué edad se puede sacar en Suiza la licencia de conducir para carros? A partir de los…|16 años|17 años|18 años|20 años
+291|¿Qué regula el contrato de alquiler de una vivienda?|El nivel de la vivienda|Los derechos y obligaciones de las partes del contrato|Qué tipo de comida se puede cocinar|Cómo hay que amoblar la vivienda
+292|¿Con qué requisitos se puede casar uno en Suiza?|La novia tiene que estar embarazada.|Los novios tienen que tener 18 años y ser capaces de discernimiento.|Los novios tienen que tener un ingreso mínimo.|Los padres de los novios tienen que estar de acuerdo.
+293|¿Qué son los «Durchdiener»?|Empleados de un hotel de lujo suizo|Empleados federales que preparan reuniones y documentos para el Consejo Federal|Miembros del ejército que cumplen voluntariamente su servicio de instrucción de forma continua, sin interrupción|Miembros de la Guardia Suiza en el Vaticano
+294|¿Cuál es el límite de alcohol al manejar según la Ley de Circulación Vial?|Concentración de alcohol en sangre de 0,49 por mil|Concentración de alcohol en sangre de 0,51 por mil|Concentración de alcohol en sangre de 0,59 por mil|Concentración de alcohol en sangre de 0,61 por mil
+295|En Suiza, las personas que viven en concubinato…|pagan impuestos como personas individuales.|están obligadas a casarse en un plazo de 2 años.|pagan un impuesto de pareja.|son tratadas legalmente como casadas.
+296|¿Qué apellido recibe el hijo de padres casados?|Siempre un apellido doble, con el de la madre primero|Siempre el apellido del padre|Siempre el apellido de la madre|El apellido que elijan los padres si no tienen un apellido de familia común
+297|¿Quién tiene que notificar la intención de casarse en el registro civil (Zivilstandsamt)?|Solo el hombre|Solo los padres|Las dos personas que se van a casar|Solo la mujer
+298|¿Cuál es un requisito para casarse en Suiza?|Ambos tienen que tener al menos 16 años.|Ya tienen que vivir en una unión registrada.|Tienen que tener el mismo domicilio.|No puede haber un parentesco cercano entre ellos.
+299|Los dueños de un perro tienen que, por su perro…|tener un nombre.|tener una partida de nacimiento.|pagar el impuesto sobre perros.|contratar un seguro de salud.
+300|¿Cuál es una característica importante de las organizaciones no gubernamentales (ONG)? Ellas…|buscan ganancias.|son parte del gobierno.|se comprometen con una causa social (p. ej. protección de la naturaleza y del medio ambiente).|son sociedades secretas.
+301|¿Quién decide qué artículos se publican en el periódico?|La redacción del periódico|La asociación cantonal de periodistas|La oficina central de medios del cantón|La policía de medios
+302|¿De qué hay que ser miembro obligatoriamente en Suiza?|De un partido|De un club deportivo|De una caja de salud (Krankenkasse)|De un club de automóviles o de bicicletas
+303|¿Cuál de los siguientes nombres es el de un diario de Argovia?|Aargauer News|Aargauer Zeitung|Aargauer Tagblatt|Aargau aktuell
+304|¿Qué afirmación sobre la SRG SSR es correcta?|La SRG SSR es el reglamento suizo de televisión.|La SRG SSR es la oferta de televisión de la Suiza alemana.|La SRG SSR es la oferta de televisión y radio para las cuatro regiones lingüísticas de Suiza.|La SRG SSR es la organización que agrupa a todos los canales de televisión suizos.
+305|¿Cuál es el periódico más grande de Suiza (Suiza alemana) por tiraje (2024)?|Neue Zürcher Zeitung|20 Minuten|Blick|Die Nordwestschweiz
+306|¿Dónde tiene que avisar cuando se muda?|En la oficina de impuestos|En la policía|En el seguro de inmuebles|En el municipio (registro de habitantes / Einwohnerkontrolle)
+307|¿Quién puede pedir el divorcio?|Solo los dos cónyuges juntos|Los hijos de los cónyuges|Un cónyuge que quiera divorciarse|Un amigo de los cónyuges
+309|Si uno quiere terminar una relación laboral de forma regular, tiene que…|esperar a que la jefa o el jefe regrese de vacaciones.|desocupar el puesto y no volver más.|destruir el contrato de trabajo.|renunciar con una carta certificada o hacer confirmar por escrito el recibo de la renuncia.
+310|¿Quién firma el contrato de trabajo?|El trabajador y la autoridad laboral|El trabajador y el empleador|El trabajador y la asociación de empleadores|El trabajador y el sindicato
+311|¿Qué puede hacer uno si el empleador le paga menos sueldo sin motivo?|No hay ninguna opción legal.|Puede dejar de ir al trabajo hasta que termine el contrato.|Puede acudir al tribunal laboral.|Puede poner una denuncia en la policía.
+312|¿Qué se regula, entre otras cosas, en un contrato de trabajo? Se regula…|qué caja de salud hay que elegir.|cuánto es la pensión de vejez.|cómo se organiza el tiempo libre.|cuánto es el sueldo.
+313|¿A quién pueden acudir los trabajadores con preguntas sobre derecho laboral?|Al sindicato o a la asesoría legal gratuita del municipio|A la oficina de impuestos|A la policía|A la parroquia
+314|Una empleada no puede ser despedida si…|siempre fue puntual.|rechaza el despido.|está embarazada.|lleva mucho tiempo trabajando en la empresa.
+315|Economiesuisse representa los intereses…|de los empleados.|de las empresas.|de la gastronomía y hotelería.|de las y los artesanos.
+316|Los sindicatos representan los intereses de…|los empleadores.|los trabajadores.|los jóvenes.|las empresas.
+317|Los trabajadores pueden acudir al tribunal laboral cuando…|tienen un problema con un cliente.|los despidieron sin motivo.|tienen un problema con un vecino.|tienen dificultades económicas.
+318|¿Qué afirmación sobre la licencia de maternidad en Suiza es FALSA?|La licencia de maternidad dura 14 semanas.|El empleador no puede descontar las vacaciones normales de la licencia de maternidad.|La licencia de maternidad solo se puede tomar entre los 20 y los 50 años de edad.|Toda mujer que trabaja tiene derecho a licencia de maternidad.
+319|¿A quién tiene que dejar entrar a su vivienda si lo pide con motivo justificado?|A la cartera o el cartero|A la arrendadora o el arrendador|A las personas que se postulan a un cargo público en el municipio|Al empleador
+320|¿Qué día feriado vale por ley para toda Suiza?|1 de agosto|Día de la Ascensión|Viernes Santo|1 de mayo
+321|¿Dónde se encuentra información sobre puestos de aprendizaje, profesiones y trabajo?|En la oficina de impuestos|En el Archivo Federal|En la Oficina Federal de Profesión e Información|En el centro de información profesional (BIZ)
+322|¿Qué sector aporta la mayor parte del PIB (producto interno bruto) de Suiza? (2024)|Agricultura|Servicios|Industria|Medicina
+323|¿Qué es un centro de formación profesional (Berufsbildungszentrum)?|Una agencia de empleo|Una escuela profesional|Una universidad de ciencias aplicadas|Un centro de investigación técnica del trabajo
+324|¿Quién es el socio comercial más importante de Suiza? (2024)|La UE|EE. UU.|China|Rusia
+325|¿Cuándo puede alguien recibir las llamadas prestaciones complementarias (Ergänzungsleistungen)?|Cuando tiene un puesto de aprendizaje en una empresa|Cuando no llega al límite del sueldo mínimo|Cuando, a pesar de la pensión de IV o AHV, no alcanza el mínimo vital|Cuando está desempleado
+326|¿Qué significa MWST?|Libertad de opinión|Bienestar medio|Impuesto al valor agregado (IVA)|Medida del nivel de agua de los ríos
+327|¿A quién tiene que acudir si quiere casarse?|A los padres|A la agencia regional de parejas|Al registro civil (Zivilstandsamt)|A la consejería matrimonial
+328|¿Quién puede fundar una asociación (Verein)?|Solo personas con un historial deportivo|Solo personas con cierto nivel de ingresos|Cualquier persona en Suiza|Todas las mujeres y hombres mayores de 21 años
