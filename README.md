@@ -6,7 +6,16 @@ Mit diesem Lerntrainer übst du für den **staatsbürgerlichen Test des Kantons 
 
 ## Starten
 
-Doppelklick auf **`app/index.html`**. Die App läuft offline, ohne Installation und ohne Server.
+**Online / Handy:** https://lerchox.github.io/einbuergerung-ag/
+
+- **iPhone (Safari):** Teilen-Symbol → «Zum Home-Bildschirm»
+- **Android (Chrome):** Menü ⋮ → «App installieren» bzw. «Zum Startbildschirm hinzufügen»
+
+Nach dem ersten Öffnen funktioniert die App auch offline.
+
+**Am Computer ohne Internet:** Doppelklick auf **`app/index.html`**.
+
+Jede Änderung im Ordner `app/` wird über GitHub Actions automatisch veröffentlicht.
 
 ## Inhalt
 
