@@ -8,7 +8,7 @@
   D.chapters.forEach(c => c.questions.forEach(q => { byId[q.id] = q; q.chapter = c.id; }));
 
   // ---------- Speicher (nur lokal im Browser) ----------
-  const APP_VERSION = '5 (14.11.2026)';
+  const APP_VERSION = '6 (14.11.2026)';
   // Mehrere Personen (Profile) auf demselben Gerät: jede Person hat ihren eigenen Fortschritt.
   const OLD_KEY = 'einb-ag-v1', PKEY = 'einb-ag-profiles', pKey = id => 'einb-ag-p-' + id;
   const lsGet = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
@@ -48,6 +48,16 @@
   const chapter = id => D.chapters.find(c => c.id === id);
   const learned = qs => qs.filter(q => (store.stats[q.id] || {}).last === true).length;
   const wrongList = qs => qs.filter(q => (store.stats[q.id] || {}).last === false);
+  // Status einer Frage: noch nie gefragt / zuletzt richtig / zuletzt falsch
+  const status = q => { const s = store.stats[q.id]; return !s ? 'neu' : s.last === false ? 'falsch' : 'richtig'; };
+  const newList = qs => qs.filter(q => status(q) === 'neu');
+  const counts = qs => { const c = { neu: 0, richtig: 0, falsch: 0 }; qs.forEach(q => c[status(q)]++); return c; };
+  const pct = (a, n) => (n ? a / n * 100 : 0).toFixed(1);
+  function segBar(qs) {
+    const c = counts(qs), n = qs.length;
+    return `<div class="bar seg" title="${c.richtig} richtig, ${c.falsch} falsch, ${c.neu} noch nie gefragt"><i class="ok" style="width:${pct(c.richtig, n)}%"></i><i class="no" style="width:${pct(c.falsch, n)}%"></i></div>`;
+  }
+  const legend = c => `<span class="lg ok">✔ ${c.richtig} richtig</span> · <span class="lg no">✘ ${c.falsch} falsch</span> · <span class="lg">○ ${c.neu} noch nie gefragt</span>`;
 
   let S = null; // aktuelle Sitzung
   let tick = null;
@@ -77,34 +87,40 @@
 
       <div class="card">
         <h2 style="margin-top:0">Kapitel 1 · Offizieller Übungstest Aargau</h2>
-        <p class="meta">${ag.length} Fragen aus dem offiziellen Fragenkatalog (gültig ab 29.09.2025) · ${learned(ag)} zuletzt richtig beantwortet</p>
-        <div class="bar"><i style="width:${(learned(ag) / ag.length * 100).toFixed(1)}%"></i></div>
+        <p class="meta">${ag.length} Fragen aus dem offiziellen Fragenkatalog (gültig ab 29.09.2025)</p>
+        ${segBar(ag)}
+        <p class="meta" style="margin:6px 0 0">${legend(counts(ag))}</p>
         <div class="grid" style="margin-top:14px">
           <button class="btn primary block" data-act="exam"><b>Prüfung simulieren</b><small>45 Fragen · 40 Minuten · bestanden ab 34</small></button>
           <button class="btn block" data-act="practice" data-ch="ag"><b>Alle Fragen, zufällig</b><small>sofortige Auflösung</small></button>
           ${orderedBtn('ag')}
           <button class="btn block" data-act="wrong" data-ch="ag" ${wAg ? '' : 'disabled'}><b>Fehler wiederholen</b><small>${wAg} Frage(n)</small></button>
+          <button class="btn block" data-act="new" data-ch="ag" ${newList(ag).length ? '' : 'disabled'}><b>Noch nie gefragte Fragen</b><small>${newList(ag).length} Frage(n)</small></button>
+          <button class="btn block" data-act="stats" data-ch="ag"><b>📊 Statistik</b><small>Übersicht und Fragenliste</small></button>
         </div>
         <h2>Nach Themenbereich üben</h2>
         <div class="grid">${Object.keys(D.exam.dist).map(k => {
           const qs = ag.filter(q => q.cat === k);
-          return `<button class="btn block" data-act="practice" data-ch="ag" data-cat="${k}"><b>${esc(catName(k))}</b><small>${learned(qs)} / ${qs.length} · in der Prüfung ${D.exam.dist[k]} Fragen</small></button>`;
+          return `<button class="btn block" data-act="practice" data-ch="ag" data-cat="${k}"><b>${esc(catName(k))}</b><small>✔ ${counts(qs).richtig} · ✘ ${counts(qs).falsch} · ○ ${counts(qs).neu} von ${qs.length} · in der Prüfung ${D.exam.dist[k]}</small>${segBar(qs)}</button>`;
         }).join('')}</div>
         ${last.length ? `<h2>Letzte Prüfungen</h2><table>${last.map(e => `<tr><td>${new Date(e.t).toLocaleString('de-CH')}</td><td class="num">${e.score} / ${D.exam.total}</td><td>${e.score >= D.exam.pass ? '✅ bestanden' : '❌ nicht bestanden'}</td></tr>`).join('')}</table>` : ''}
       </div>
 
       <div class="card">
         <h2 style="margin-top:0">Kapitel 2 · Strengelbach & Alltag</h2>
-        <p class="meta">${ex.length} Zusatzfragen zur Vorbereitung auf das Einbürgerungsgespräch in der Gemeinde · ${learned(ex)} zuletzt richtig</p>
-        <div class="bar"><i style="width:${(learned(ex) / ex.length * 100).toFixed(1)}%"></i></div>
+        <p class="meta">${ex.length} Zusatzfragen zur Vorbereitung auf das Einbürgerungsgespräch in der Gemeinde</p>
+        ${segBar(ex)}
+        <p class="meta" style="margin:6px 0 0">${legend(counts(ex))}</p>
         <div class="grid" style="margin-top:14px">
           ${['strengelbach', 'alltag'].map(k => {
             const qs = ex.filter(q => q.cat === k);
-            return `<button class="btn block" data-act="practice" data-ch="extra" data-cat="${k}"><b>${esc(catName(k))}</b><small>${learned(qs)} / ${qs.length}</small></button>`;
+            return `<button class="btn block" data-act="practice" data-ch="extra" data-cat="${k}"><b>${esc(catName(k))}</b><small>✔ ${counts(qs).richtig} · ✘ ${counts(qs).falsch} · ○ ${counts(qs).neu} von ${qs.length}</small>${segBar(qs)}</button>`;
           }).join('')}
           <button class="btn block" data-act="practice" data-ch="extra"><b>Alle Zusatzfragen</b><small>gemischt</small></button>
           ${orderedBtn('extra')}
           <button class="btn block" data-act="wrong" data-ch="extra" ${wEx ? '' : 'disabled'}><b>Fehler wiederholen</b><small>${wEx} Frage(n)</small></button>
+          <button class="btn block" data-act="new" data-ch="extra" ${newList(ex).length ? '' : 'disabled'}><b>Noch nie gefragte Fragen</b><small>${newList(ex).length} Frage(n)</small></button>
+          <button class="btn block" data-act="stats" data-ch="extra"><b>📊 Statistik</b><small>Übersicht und Fragenliste</small></button>
         </div>
       </div>
 
@@ -128,6 +144,8 @@
       else if (a === 'ordered') startOrdered(ch);
       else if (a === 'wrong') startPractice(wrongList(chapter(ch).questions), 'Fehler wiederholen');
       else if (a === 'info') info();
+      else if (a === 'new') startPractice(newList(chapter(ch).questions), 'Noch nie gefragte Fragen');
+      else if (a === 'stats') stats(ch, 'alle', null);
       else if (a === 'update') checkUpdate(b);
       else if (a === 'reset' && confirm(`Lernfortschritt und Prüfungsresultate von «${activeProfile().name}» löschen?`)) { store = Object.assign(blank(), { esAlways: store.esAlways }); save(); home(); }
       else if (a === 'profile') { switchProfile(b.dataset.id); home(); }
@@ -295,7 +313,7 @@
     });
     const pass = score >= D.exam.pass;
     const used = Math.min(D.exam.minutes * 60000, Date.now() - (S.deadline - D.exam.minutes * 60000));
-    store.exams.push({ t: Date.now(), score }); store.exams = store.exams.slice(-30); save();
+    store.exams.push({ t: Date.now(), score }); store.exams = store.exams.slice(-200); save();
     const list = S.list, answers = S.answers;
     S = null;
     app.innerHTML = `<h1>Ergebnis Prüfungssimulation</h1>
@@ -318,6 +336,68 @@
       <div class="row"><button class="btn primary" id="h">Zur Startseite</button><button class="btn" id="again">Neue Prüfung</button></div>`;
     document.getElementById('h').onclick = home;
     document.getElementById('again').onclick = startExam;
+    window.scrollTo(0, 0);
+  }
+
+  // ---------- Statistik ----------
+  const FILTERS = { alle: 'Alle', neu: '○ Noch nie gefragt', falsch: '✘ Falsch', richtig: '✔ Richtig' };
+  const ICON = { neu: '○', falsch: '✘', richtig: '✔' };
+  function stats(ch, filter, cat) {
+    stopTimer(); S = null;
+    const c = chapter(ch), all = c.questions.slice().sort((a, b) => a.n - b.n);
+    const cats = ch === 'ag' ? Object.keys(D.exam.dist) : [...new Set(all.map(q => q.cat))];
+    const tot = counts(all);
+    let answers = 0, rights = 0;
+    all.forEach(q => { const s = store.stats[q.id]; if (s) { answers += s.r + s.w; rights += s.r; } });
+    const shown = all.filter(q => (!cat || q.cat === cat) && (filter === 'alle' || status(q) === filter));
+    const exams = ch === 'ag' ? store.exams.slice().reverse() : [];
+    const passed = exams.filter(e => e.score >= D.exam.pass).length;
+    const cell = (k, f, v) => `<a href="#" data-f="${f}" data-c="${k || ''}">${v}</a>`;
+
+    app.innerHTML = `
+      <h1>📊 Statistik</h1>
+      <p class="lead">👤 ${esc(activeProfile().name)} · ${esc(c.title[0])}</p>
+      <div class="card">
+        ${segBar(all)}
+        <p class="meta" style="margin:6px 0 0">${legend(tot)}</p>
+        <p class="meta">${all.length - tot.neu} von ${all.length} Fragen schon gefragt (${pct(all.length - tot.neu, all.length)} %) · ${answers} Antworten insgesamt, davon ${answers ? Math.round(rights / answers * 100) : 0} % richtig</p>
+        <table>
+          <tr><th>Themenbereich</th><th class="num">✔</th><th class="num">✘</th><th class="num">○</th><th class="num">Total</th></tr>
+          ${cats.map(k => { const qs = all.filter(q => q.cat === k), x = counts(qs);
+            return `<tr><td>${cell(k, 'alle', esc(catName(k)))}</td><td class="num ok">${cell(k, 'richtig', x.richtig)}</td><td class="num no">${cell(k, 'falsch', x.falsch)}</td><td class="num">${cell(k, 'neu', x.neu)}</td><td class="num">${qs.length}</td></tr>`; }).join('')}
+          <tr><th>${cell('', 'alle', 'Total')}</th><th class="num ok">${cell('', 'richtig', tot.richtig)}</th><th class="num no">${cell('', 'falsch', tot.falsch)}</th><th class="num">${cell('', 'neu', tot.neu)}</th><th class="num">${all.length}</th></tr>
+        </table>
+        <p class="src">Zahlen antippen, um die passenden Fragen unten aufzulisten. «Richtig/Falsch» zählt jeweils die letzte Antwort auf eine Frage.</p>
+      </div>
+      ${ch === 'ag' ? `<div class="card"><h2 style="margin-top:0">Prüfungssimulationen</h2>
+        ${exams.length ? `<p class="meta">${exams.length} Prüfung(en), davon ${passed} bestanden · Durchschnitt ${(exams.reduce((a, e) => a + e.score, 0) / exams.length).toFixed(1)} / ${D.exam.total} · Bestes Resultat ${Math.max(...exams.map(e => e.score))}</p>
+        <table>${exams.map(e => `<tr><td>${new Date(e.t).toLocaleString('de-CH', { dateStyle: 'short', timeStyle: 'short' })}</td><td class="num">${e.score} / ${D.exam.total}</td><td>${e.score >= D.exam.pass ? '✅' : '❌'}</td></tr>`).join('')}</table>`
+        : '<p class="meta">Noch keine Prüfung simuliert.</p>'}</div>` : ''}
+      <div class="card" id="liste">
+        <h2 style="margin-top:0">Fragenliste</h2>
+        <div class="row">${Object.entries(FILTERS).map(([f, l]) => `<button class="btn ${f === filter ? 'primary' : ''}" data-f="${f}" data-c="${cat || ''}">${l}</button>`).join('')}</div>
+        <div class="row" style="margin-top:8px">
+          <button class="btn ${!cat ? 'primary' : ''}" data-f="${filter}" data-c="">Alle Bereiche</button>
+          ${cats.map(k => `<button class="btn ${cat === k ? 'primary' : ''}" data-f="${filter}" data-c="${k}">${esc(catName(k))}</button>`).join('')}
+        </div>
+        <div class="row" style="margin:12px 0">
+          <span class="meta">${shown.length} Frage(n)</span><span class="spacer"></span>
+          <button class="btn primary" id="practiceShown" ${shown.length ? '' : 'disabled'}>Diese Fragen üben</button>
+        </div>
+        <div class="qlist">${shown.map(q => { const s = store.stats[q.id], st = status(q);
+          return `<details class="qi ${st}"><summary><span class="ic">${ICON[st]}</span><span class="nr">${q.n}</span><span class="tx">${esc(q.de.q)}</span><span class="ct">${s ? `${s.r}✔ ${s.w}✘` : ''}</span></summary>
+            <div class="ans">✔ ${q.ok.map(i => L[i] + '. ' + esc(q.de.a[i])).join(' / ')}${q.img.length ? ' (siehe Bild)' : ''}</div>
+            <div class="ans es">ES: ${esc(q.es.q)} → ${q.ok.map(i => esc(q.es.a[i])).join(' / ')}</div></details>`; }).join('')}</div>
+      </div>
+      <div class="row"><button class="btn" id="h">← Zur Startseite</button></div>`;
+
+    app.querySelectorAll('[data-f]').forEach(el => el.addEventListener('click', e => {
+      e.preventDefault();
+      stats(ch, el.dataset.f, el.dataset.c || null);
+      document.getElementById('liste').scrollIntoView();
+    }));
+    document.getElementById('practiceShown').onclick = () => startPractice(shown, `Statistik: ${FILTERS[filter]}${cat ? ' · ' + catName(cat) : ''}`);
+    document.getElementById('h').onclick = home;
     window.scrollTo(0, 0);
   }
 

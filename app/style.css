@@ -34,6 +34,22 @@ p.lead{color:var(--muted);margin:0 0 16px}
 .meta{color:var(--muted);font-size:14px}
 .bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:6px}
 .bar>i{display:block;height:100%;background:var(--ok)}
+.bar.seg{display:flex;height:8px}
+.bar.seg>i.no{background:var(--bad)}
+.btn.block .bar{width:100%;margin-top:6px}
+.lg.ok,td.ok a,th.ok a{color:var(--ok)} .lg.no,td.no a,th.no a{color:var(--bad)}
+td a,th a{text-decoration:none;color:inherit;font-weight:600}
+.qlist{display:flex;flex-direction:column;gap:6px}
+.qi{border:1px solid var(--line);border-left:4px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card)}
+.qi.richtig{border-left-color:var(--ok)} .qi.falsch{border-left-color:var(--bad)}
+.qi summary{display:flex;gap:8px;align-items:baseline;cursor:pointer;list-style:none}
+.qi summary::-webkit-details-marker{display:none}
+.qi .ic{width:16px;font-weight:700} .qi.richtig .ic{color:var(--ok)} .qi.falsch .ic{color:var(--bad)} .qi.neu .ic{color:var(--muted)}
+.qi .nr{color:var(--muted);font-size:13px;min-width:28px;font-variant-numeric:tabular-nums}
+.qi .tx{flex:1;font-size:15px}
+.qi .ct{color:var(--muted);font-size:12px;white-space:nowrap}
+.qi .ans{margin:8px 0 0 52px;font-size:14px;color:var(--ok)}
+.qi .ans.es{color:var(--muted)}
 .q{font-size:19px;font-weight:600;margin:6px 0 12px}
 .q img{display:block;max-width:100%;height:auto;margin:12px 0;border-radius:8px;border:1px solid var(--line);background:#fff}
 .opts{display:flex;flex-direction:column;gap:8px}
